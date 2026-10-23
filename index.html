@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Era Shift - موسوعة تاريخ وتطور الابتكارات العالمية عبر العصور</title>
+  <meta name="application-name" content="Era Shift">
+  <meta name="description" content="Era Shift موسوعة تفاعلية تستعرض تاريخ وتطور الاختراعات والتكنولوجيا من الكاميرا والحاسوب والهاتف والبطاريات والمولدات إلى البيانات الضخمة وإنترنت الأشياء والذكاء الاصطناعي.">
+  <meta name="keywords" content="Era Shift, تاريخ التكنولوجيا, الاختراعات, الكاميرا, الحاسوب, الهاتف, الإنترنت, البطاريات, المولدات الكهربائية, Big Data, البيانات الضخمة, IoT, إنترنت الأشياء, Kafka, Spark, AI">
+  <meta name="robots" content="index, follow">
+  <link rel="icon" href="https://img.icons8.com/neon/96/time-machine.png" type="image/png">
+  <meta property="og:title" content="Era Shift - رحلة تاريخ الابتكارات">
+  <meta property="og:description" content="موسوعة تفاعلية لاستكشاف تاريخ وتطور التكنولوجيا والاختراعات عبر العصور.">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200&auto=format&fit=crop">
+  <meta property="og:type" content="website">
+  <style>
+    /* =========================================================
+        المتغيرات الأساسية
+    ========================================================= */
+    :root {
+      --bg-color: #03030d;
+      --primary-neon: #00f2fe;
+      --secondary-neon: #ff007f;
+      --purple-neon: #8b5cf6;
+      --green-neon: #00ff9d;
+      --yellow-neon: #ffd000;
+
+      --card-bg: rgba(15, 23, 42, 0.96);
+      --card-bg-light: rgba(30, 41, 59, 0.8);
+
+      --text-main: #ffffff;
+      --text-muted: #cbd5e1;
+      --text-soft: #94a3b8;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      background: var(--bg-color);
+      color: var(--text-main);
+      min-height: 100vh;
+      overflow-x: hidden;
+      padding-bottom: 80px;
+    }
+    /* =========================================================
+        الخلفية
+    ========================================================= */
+    .space-bg {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(121, 40, 202, 0.45), transparent 45%),
+        radial-gradient(circle at 85% 80%, rgba(255, 0, 127, 0.35), transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(0, 242, 254, 0.22), transparent 60%),
+        #03030d;
+      z-index: -3;
+    }
+    .stars {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      opacity: 0.35;
+      background-image:
+        radial-gradient(#fff 1px, transparent 1px),
+        radial-gradient(#00f2fe 1px, transparent 1px);
+      background-size: 80px 80px, 120px 120px;
+      background-position: 0 0, 40px 40px;
+    }
+    .planet {
+      position: fixed;
+      border-radius: 50%;
+      z-index: -1;
+      opacity: 0.65;
+      pointer-events: none;
+    }
+
+    .planet-1 {
+      top: 8%;
+      right: 4%;
+      width: 150px;
+      height: 150px;
+      background:
+        radial-gradient(circle at 30% 30%, #00f2fe, #004466);
+      box-shadow: 0 0 50px rgba(0, 242, 254, 0.55);
+    }
+
+    .planet-2 {
+      bottom: 8%;
+      left: 3%;
+      width: 220px;
+      height: 220px;
+      background:
+        radial-gradient(circle at 30% 30%, #ff007f, #4a0024);
+      box-shadow: 0 0 60px rgba(255, 0, 127, 0.45);
+    }
+    /* =========================================================
+        الهيدر
+    ========================================================= */
+    header {
+      text-align: center;
+      padding: 55px 20px 40px;
+      background: rgba(5, 5, 20, 0.88);
+      border-bottom: 2px solid rgba(0, 242, 254, 0.4);
+      backdrop-filter: blur(15px);
+      margin-bottom: 30px;
+    }
+    header h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 900;
+      background: linear-gradient(
+        135deg,
+        #ffffff,
+        var(--primary-neon),
+        var(--secondary-neon)
+      );
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 0 15px rgba(0, 242, 254, 0.8));
+      margin-bottom: 15px;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      max-width: 800px;
+      line-height: 1.9;
+      margin: 0 auto 25px;
+    }
+    .search-box {
+      max-width: 650px;
+      margin: auto;
+    }
+    .search-input {
+      width: 100%;
+      padding: 15px 22px;
+      border-radius: 30px;
+      border: 2px solid var(--primary-neon);
+      background: rgba(15, 23, 42, 0.92);
+      color: #fff;
+      font-size: 1.05rem;
+      outline: none;
+      transition: 0.3s;
+    }
+    .search-input::placeholder {
+      color: #94a3b8;
+    }
+    .search-input:focus {
+      box-shadow:
+        0 0 20px rgba(0, 242, 254, 0.5),
+        inset 0 0 15px rgba(0, 242, 254, 0.08);
+      border-color: var(--secondary-neon);
+    }
+    /* =========================================================
+        التصنيفات
+    ========================================================= */
+    .category-filter {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+      padding: 0 20px;
+    }
+    .filter-btn {
+      background: rgba(15, 23, 42, 0.85);
+      border: 2px solid var(--primary-neon);
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 30px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: var(--primary-neon);
+      color: #000;
+      box-shadow: 0 0 20px rgba(0, 242, 254, 0.75);
+      transform: translateY(-2px);
+    }
+    /* =========================================================
+        عداد النتائج
+    ========================================================= */
+    .results-info {
+      max-width: 1200px;
+      margin: 0 auto 25px;
+      padding: 0 20px;
+      text-align: center;
+      color: var(--text-soft);
+    }
+
+    .results-count {
+      display: inline-block;
+      padding: 8px 18px;
+      border-radius: 20px;
+      border: 1px solid rgba(0, 242, 254, 0.35);
+      background: rgba(0, 242, 254, 0.06);
+      color: var(--primary-neon);
+      font-weight: bold;
+    }
+
+    /* =========================================================
+        شبكة البطاقات
+    ========================================================= */
+    .timeline-container {
+      max-width: 1250px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 30px;
+    }
+
+    .era-card {
+      background: var(--card-bg);
+      border-radius: 22px;
+      border: 2px solid rgba(0, 242, 254, 0.35);
+      overflow: hidden;
+      box-shadow: 0 0 25px rgba(0, 242, 254, 0.12);
+      transition: all 0.35s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .era-card:hover {
+      transform: translateY(-9px);
+      border-color: var(--secondary-neon);
+      box-shadow: 0 0 40px rgba(255, 0, 127, 0.35);
+    }
+
+    .era-img {
+      width: 100%;
+      height: 230px;
+      object-fit: cover;
+      border-bottom: 2px solid var(--primary-neon);
+      display: block;
+    }
+
+    .era-body {
+      padding: 25px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .era-badge-group {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+
+    .era-year {
+      padding: 6px 13px;
+      background: var(--secondary-neon);
+      color: #fff;
+      font-weight: bold;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      white-space: nowrap;
+    }
+
+    .era-cat-tag {
+      font-size: 0.8rem;
+      color: var(--primary-neon);
+      border: 1px solid var(--primary-neon);
+      padding: 5px 9px;
+      border-radius: 12px;
+      background: rgba(0, 242, 254, 0.08);
+    }
+
+    .era-title {
+      font-size: 1.55rem;
+      color: #fff;
+      font-weight: 800;
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+
+    .era-snippet {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      line-height: 1.9;
+      margin-bottom: 22px;
+    }
+
+    .open-btn {
+      background: linear-gradient(
+        90deg,
+        var(--primary-neon),
+        #0088ff
+      );
+      color: #000;
+      border: none;
+      padding: 14px 20px;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 900;
+      cursor: pointer;
+      transition: 0.3s;
+      width: 100%;
+    }
+
+    .open-btn:hover {
+      background: var(--secondary-neon);
+      color: #fff;
+      box-shadow: 0 0 20px rgba(255, 0, 127, 0.75);
+    }
+
+    /* =========================================================
+        النافذة المنبثقة
+    ========================================================= */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(2, 2, 10, 0.95);
+      backdrop-filter: blur(20px);
+      z-index: 3000;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: #0b1220;
+      border: 2px solid var(--primary-neon);
+      border-radius: 24px;
+      max-width: 1100px;
+      width: 100%;
+      max-height: 92vh;
+      overflow-y: auto;
+      padding: 38px;
+      position: relative;
+      box-shadow: 0 0 60px rgba(0, 242, 254, 0.35);
+    }
+
+    .close-btn {
+      position: sticky;
+      top: 0;
+      float: left;
+      background: var(--secondary-neon);
+      color: #fff;
+      border: none;
+      padding: 9px 18px;
+      border-radius: 20px;
+      font-weight: bold;
+      font-size: 0.95rem;
+      cursor: pointer;
+      z-index: 10;
+    }
+
+    .modal-title {
+      font-size: clamp(1.7rem, 4vw, 2.6rem);
+      color: var(--primary-neon);
+      margin-bottom: 15px;
+      font-weight: 900;
+      line-height: 1.5;
+    }
+
+    .modal-intro {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      line-height: 2;
+      margin-bottom: 25px;
+    }
+
+    .modal-img-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 15px;
+      margin: 20px 0 30px;
+    }
+
+    .modal-img {
+      width: 100%;
+      height: 230px;
+      object-fit: cover;
+      border-radius: 14px;
+      border: 1px solid var(--primary-neon);
+      box-shadow: 0 0 20px rgba(0, 242, 254, 0.12);
+    }
+
+    .modal-section {
+      margin-bottom: 25px;
+      background: rgba(255, 255, 255, 0.035);
+      padding: 24px;
+      border-radius: 15px;
+      border-right: 4px solid var(--secondary-neon);
+    }
+
+    .modal-section h3 {
+      font-size: 1.4rem;
+      color: var(--primary-neon);
+      margin-bottom: 15px;
+      border-bottom: 1px solid rgba(0, 242, 254, 0.2);
+      padding-bottom: 8px;
+    }
+
+    .modal-section p {
+      font-size: 1.08rem;
+      color: #e2e8f0;
+      line-height: 2.05;
+      text-align: justify;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 15px;
+      margin: 25px 0;
+    }
+
+    .stat-card {
+      padding: 20px;
+      border-radius: 15px;
+      text-align: center;
+      background: linear-gradient(
+        145deg,
+        rgba(0, 242, 254, 0.08),
+        rgba(139, 92, 246, 0.08)
+      );
+      border: 1px solid rgba(0, 242, 254, 0.25);
+    }
+
+    .stat-value {
+      font-size: 1.6rem;
+      color: var(--primary-neon);
+      font-weight: 900;
+      display: block;
+      margin-bottom: 7px;
+    }
+
+    .stat-label {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .data-flow {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 10px;
+      margin: 25px 0;
+      align-items: center;
+    }
+
+    .flow-step {
+      position: relative;
+      padding: 17px 10px;
+      text-align: center;
+      border: 1px solid rgba(0, 242, 254, 0.35);
+      background: rgba(0, 242, 254, 0.06);
+      border-radius: 12px;
+      color: #fff;
+      font-weight: bold;
+      font-size: 0.9rem;
+    }
+
+    .v-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .v-card {
+      padding: 20px;
+      border-radius: 15px;
+      border: 1px solid rgba(255, 0, 127, 0.3);
+      background: rgba(255, 0, 127, 0.05);
+    }
+
+    .v-card h4 {
+      color: var(--secondary-neon);
+      font-size: 1.2rem;
+      margin-bottom: 8px;
+    }
+
+    .v-card p {
+      font-size: 0.95rem;
+      text-align: right;
+      line-height: 1.8;
+    }
+
+    .bigdata-highlight {
+      padding: 25px;
+      border-radius: 18px;
+      margin: 20px 0;
+      background:
+        linear-gradient(
+          135deg,
+          rgba(0,242,254,0.08),
+          rgba(139,92,246,0.10),
+          rgba(255,0,127,0.08)
+        );
+      border: 1px solid rgba(0,242,254,0.35);
+    }
+
+    .bigdata-highlight h4 {
+      color: var(--green-neon);
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 60px;
+      padding: 30px 20px;
+      color: #64748b;
+      border-top: 1px solid rgba(0,242,254,0.15);
+    }
+
+    footer strong {
+      color: var(--primary-neon);
+    }
+
+    @media (max-width: 600px) {
+      header {
+        padding: 35px 15px;
+      }
+      .timeline-container {
+        grid-template-columns: 1fr;
+        padding: 0 12px;
+      }
+      .modal-overlay {
+        padding: 8px;
+      }
+      .modal-content {
+        padding: 25px 15px;
+        max-height: 95vh;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="space-bg"></div>
+  <div class="stars"></div>
+  <div class="planet planet-1"></div>
+  <div class="planet planet-2"></div>
+
+  <!-- HEADER -->
+  <header>
+    <h1>
+      Era Shift
+      <br>
+      <span style="font-size: 0.65em; font-weight: 700; color: var(--primary-neon);">بوابة التحولات التكنولوجية وبوصلة الابتكار البشري</span>
+    </h1>
+    <p>
+      ابحر في أعماق الزمان لتكتشف كيف تشكلت الحضارة الحديثة؛ من أول ثقب ضوء في الغرفة المظلمة إلى شرارة الذكاء الاصطناعي والبيانات الضخمة. رحلة تفاعلية عبر محطات التاريخ التي رسمت ملامح مستقبلنا.
+    </p>
+    <div class="search-box">
+      <input
+        type="text"
+        id="searchInput"
+        class="search-input"
+        placeholder="🔎 ابحث عن اختراع، سنة، شخصية، تقنية أو كلمة..."
+        oninput="handleSearch()"
+      >
+    </div>
+  </header>
+
+  <!-- التصنيفات -->
+  <div class="category-filter">
+    <button class="filter-btn active" onclick="filterData('all', this)">🌍 الكل</button>
+    <button class="filter-btn" onclick="filterData('camera', this)">📷 الكاميرات والتصوير</button>
+    <button class="filter-btn" onclick="filterData('computing', this)">💻 الحاسوب والذكاء الاصطناعي</button>
+    <button class="filter-btn" onclick="filterData('telecom', this)">📡 الاتصالات والإنترنت</button>
+    <button class="filter-btn" onclick="filterData('battery', this)">🔋 البطاريات والطاقة</button>
+    <button class="filter-btn" onclick="filterData('generator', this)">⚡ المولدات والكهرباء</button>
+    <button class="filter-btn" onclick="filterData('bigdata', this)">📊 البيانات الضخمة و IoT</button>
+  </div>
+
+  <div class="results-info">
+    <span class="results-count" id="resultsCount">جاري تحميل الاختراعات...</span>
+  </div>
+
+  <!-- شبكة البطاقات -->
+  <div class="timeline-container" id="timelineGrid"></div>
+
+  <!-- النافذة المنبثقة -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-content" id="modalBody"></div>
+  </div>
+
+  <!-- بيانات الموسوعة والبرمجيات -->
+  <script>
+    const fallbackImage = "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200&auto=format&fit=crop";
+
+    const erasData = [
+      {
+        category: "camera",
+        categoryName: "الكاميرات والتصوير",
+        year: "1011 م – العصر الحديث",
+        title: "1. ابن الهيثم، الغرفة المظلمة وتطور أنواع الكاميرات عبر التاريخ",
+        thumb: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=1200&auto=format&fit=crop",
+        snippet: "من الغرفة المظلمة لابن الهيثم واللوح الفضي إلى الكاميرات الرقمية وكاميرات الهواتف الذكية المعتمدة على الذكاء الاصطناعي.",
+        images: [
+          "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=1200&auto=format&fit=crop"
+        ],
+        howItWorks: "تعتمد الغرفة المظلمة (Al-Bayt al-Muzlim) على مرور أشعة الضوء من ثقب صغير (Pin-hole) إلى حجرة أو صندوق معتم تماماً. أثبت ابن الهيثم من خلال تجاربه المعملية الدقيقة (مثل تجربة الشموع المتعددة) أن الضوء يسير في خطوط مستقيمة، مما يؤدي إلى تقاطع الأشعة القادمة من أعلى الجسم وأسفله، فتتكون صورة مقلوبة ودقيقة للمشهد الخارجي على السطح المقابل للثقب.",
+        details: "يُعد ابن الهيثم رائد المنهج العلمي الحديث. ففي رائعته 'كتاب المناظر' (المؤلف نحو 1011 م)، قام بتفنيد ودحض النظريات الإغريقية القديمة للرؤية (نظريات الإبصار الذاتي لأقليدس وبطليموس) وأثبت أن الرؤية تحدث نتيجة انعكاس الضوء من الأجسام ودخوله إلى العين. شكلت هذه الاكتشافات النواة العلمية الأولى لبناء الكاميرات بمختلف أنواعها عبر التاريخ.",
+        cameraTypes: `
+          <div style="margin-top: 15px;">
+            <h4 style="color: var(--primary-neon); margin-bottom: 12px; font-size: 1.15rem;">📷 أنواع الكاميرات قديماً (التاريخية):</h4>
+            <ul style="list-style-type: none; padding-right: 10px; line-height: 1.9; color: #e2e8f0;">
+              <li style="margin-bottom: 8px;">🔹 <strong>كاميرات الثقب (Pinhole Camera):</strong> أبسط أنواع الكاميرات بدون عدسات، تعتمد مباشرة على مبدأ الغرفة المظلمة لابن الهيثم.</li>
+              <li style="margin-bottom: 8px;">🔹 <strong>كاميرات الداجيروتيب (Daguerreotype):</strong> ظهرت عام 1839، وكانت تطبع الصور على ألواح نحاسية مطليّة بالفضة وتتطلب وقتاً طويلاً للتعريض.</li>
+              <li style="margin-bottom: 8px;">🔹 <strong>كاميرات الصندوق والفيلم (Box & Roll-Film Cameras):</strong> ابتكرتها كوداك (Kodak) عام 1888، واستخدمت أشرطة الفيلم المرن مما جعل التصوير متاحاً للجمهور.</li>
+              <li style="margin-bottom: 8px;">🔹 <strong>كاميرات العاكسة ذات العدسة الواحدة الفيلمية (SLR):</strong> شاع استخدامها في القرن العشرين، وتعتمد على مرآة داخلية لمعاينة المشهد بدقة عبر العدسة قبل الالتقاط.</li>
+            </ul>
+
+            <h4 style="color: var(--secondary-neon); margin-top: 20px; margin-bottom: 12px; font-size: 1.15rem;">📸 أنواع الكاميرات حالياً (الحديثة):</h4>
+            <ul style="list-style-type: none; padding-right: 10px; line-height: 1.9; color: #e2e8f0;">
+              <li style="margin-bottom: 8px;">🔸 <strong>الكاميرات الرقمية أحادية العدسة (DSLR):</strong> تعتمد على مستشعرات رقمية (CCD/CMOS) بدلاً من الفيلم، مع وجود مرآة آلية.</li>
+              <li style="margin-bottom: 8px;">🔸 <strong>الكاميرات عديمة المرآة (Mirrorless):</strong> الجيل الأحدث والأخف وزناً من الكاميرات الاحترافية، تعتمد على معالجة رقمية مباشرة للمشهد بدون مرآة ميكانيكية.</li>
+              <li style="margin-bottom: 8px;">🔸 <strong>كاميرات الهواتف الذكية (Computational Photography):</strong> تعتمد على معالجات صور متطورة وتقنيات الذكاء الاصطناعي لدمج عدة لقطات وتحسين الإضاءة والعمق فورياً.</li>
+              <li style="margin-bottom: 8px;">🔸 <strong>كاميرات الأكشن والمُسيّرات (Action & Drone Cameras):</strong> كاميرات صغيرة مقاومة للصدمات والماء (مثل GoPro) وكاميرات الطائرات بدون طيار للتصوير الجوي.</li>
+            </ul>
+          </div>
+        `
+      },
+      {
+        category: "camera",
+        categoryName: "الكاميرات والتصوير",
+        year: "1826 م",
+        title: "2. أول صورة فوتوغرافية دائمة – جوزيف نيسيفور نيبس وتصوير 'لو جرا'",
+        thumb: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1200&auto=format&fit=crop",
+        snippet: "نجح المخترع الفرنسي جوزيف نيسيفور نيبس في التقاط أول صورة فوتوغرافية دائمة في التاريخ والمعروفة باسم 'منظر من النافذة في لو جرا'.",
+        images: [
+          "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1200&auto=format&fit=crop"
+        ],
+        howItWorks: "استخدم نيبس لوحاً معدنياً مصنوعاً من القصدير (Pewter) مطلياً بمادة 'البيتومين' أو القار اليهودى (Bitumen of Judea) المستخرج من أسطح القار الطبيعية. هذه المادة حساسة للضوء؛ حيث تصبح صلبة وغير قابلة للذوبان عند تعرضها لأشعة الشمس، بينما تظل الأجزاء غير المعرضة للضوء قابلة للذوبان والإزالة بمزيج من زيت الليمون والبترول.",
+        details: "سُميت هذه العملية التكتيكية المبكرة بـ 'التصوير الشمسي' (Heliography). في عام 1826، وضع نيبس لوحه الحساس داخل كاميرا مظلمة ووجهها نحو نافذة ورشته في بلدة 'لو جرا' الفرنسية. استغرقت فترة التعرض للشمس عدة ساعات طويلة، ونتيجة لحركة الشمس ظهرت الإضاءة على جانبي المباني في الصورة، لتصبح هذه اللحظة نقطة التحول الكبرى التي أعلنت ميلاد التصوير الفوتوغرافي الدائم.",
+        niepceExtra: `
+          <div style="margin-top: 15px;">
+            <h4 style="color: var(--primary-neon); margin-bottom: 12px; font-size: 1.15rem;">📜 تفاصيل ومحطات تاريخية هامة عن إنجاز نيبس:</h4>
+            <ul style="list-style-type: none; padding-right: 10px; line-height: 1.9; color: #e2e8f0;">
+              <li style="margin-bottom: 8px;">🔹 <strong>صورة 'لو جرا' (View from the Window at Le Gras):</strong> تعتبر أقدم صورة فوتوغرافية ناجحة وباقية في العالم حتى يومنا هذا، ومحفوظة حالياً في مركز هاري رانسوم بجامعة تكساس الأمريكية.</li>
+              <li style="margin-bottom: 8px;">🔹 <strong>الشراكة التاريخية مع لويس داجير:</strong> أدرك نيبس أهمية تطوير تقنيته لتصبح أسرع وأدق، فدخل في شراكة عام 1829 مع المخترع الفرنسي لويس داجير (Louis Daguerre) لتعزيز الأبحاث المشتركة.</li>
+              <li style="margin-bottom: 8px;">🔹 <strong>إرث ما بعد الوفاة:</strong> توفي نيبس مفاجأة عام 1833 قبل أن يرى اختراعه يغزو العالم، لكن شريكه داجير واصل التطوير واعتمد على أساسياته ليبتكر لاحقاً كاميرا وعملية 'الداجيروتيب' الشهيرة عام 1839.</li>
+            </ul>
+          </div>
+        `
+      },
+      {
+        category: "camera",
+        categoryName: "الكاميرات والتصوير",
+        year: "1888 م",
+        title: "3. ثورة شريط الفيلم وكاميرات كوداك وشعار 'أنت تضغط على الزر ونحن نقوم بالباقي'",
+        thumb: "https://images.unsplash.com/photo-1512790182412-b19e6d62bc39?q=80&w=1200&auto=format&fit=crop",
+        snippet: "ابتكر جورج إيستمان الفيلم المرن وكاميرا كوداك المحمولة، محولاً التصوير من حرفة معقدة للمحترفين إلى متعة في متناول كل شخص.",
+        images: [
+          "https://images.unsplash.com/photo-1512790182412-b19e6d62bc39?q=80&w=1200&auto=format&fit=crop"
+        ],
+        howItWorks: "استبدل إيستمان الألواح الزجاجية الثقيلة والهشة بأشرطة فيلم مرنة مصنوعة من السيلولويد ومغطاة بمستحلب كيميائي حساس للضوء (يحتوي على بلورات هاليد الفضة). عندما يقوم المستخدم بالضغط على زر الغالق، تفتح العدسة لفترة قصيرة ليسقط الضوء على الفيلم، فتحدث تفاعلات كيميائية خفية تُخزن الصورة (صورة كامنة) لتتم معالجتها لاحقاً في المعامل.",
+        details: "قبل عام 1888، كان التصوير الفوتوغرافي يتطلب معدات ثقيلة، وخيماً مظلمة متنقلة، ومعرفة كيميائية معقدة لا تتوفر إلا للعلماء والمحترفين. أحدث جورج إيستمان زلزالاً تجارياً وثقافياً عندما أطلق أول كاميرا 'كوداك' المحمولة مع شعاره التسويقي الشهير: 'أنت تضغط على الزر، ونحن نقوم بالباقي' (You press the button, we do the rest). كانت الكاميرا تُباع محملة بفيلم يكفي لالتقاط 100 صورة، وبعد انتهائها، يرسل المستهلك الكاميرا كاملة بالبريد إلى مصنع الشركة في روتشستر لتقوم كوداك بتحميض الصور، طباعتها، وإعادة شحن الكاميرا مع فيلم جديد للزبون.",
+        kodakExtra: `
+          <div style="margin-top: 15px;">
+            <h4 style="color: var(--primary-neon); margin-bottom: 12px; font-size: 1.15rem;">🚀 الأبعاد الثقافية والاقتصادية لثورة كوداك:</h4>
+            <ul style="list-style-type: none; padding-right: 10px; line-height: 1.9; color: #e2e8f0;">
+              <li style="margin-bottom: 8px;">🔹 <strong>ديمقراطية التصوير (Democratization of Photography):</strong> لأول مرة في التاريخ، أصبح بإمكان أي شخص عادي -دون أي خبرة تقنية أو كيميائية- توثيق تفاصيل حياته اليومية ورحلاته وعائلته بكل سهولة وبأرخص تكلفة ممكنة.</li>
+              <li style="margin-bottom: 8px;">🔹 <strong>ميلاد ثقافة اللقطة السريعة (Snapshot Culture):</strong> تراجع التصوير الاستوديو الجامد والمتكلف لصالح الصور العفوية الحية التي تلتقط لحظات الحياة الحقيقية والمشاعر الإنسانية المباشرة بلا قيود.</li>
+              <li style="margin-bottom: 8px;">🔹 <strong>نموذج الأعمال الرائد (The Business Model):</strong> ابتكر إيستمان نموذج 'المنتج والمستهلك المستمر'، حيث تُباع الكاميرا بسعر معقول، بينما يُحقق الربح المستدام من بيع وتطوير الأفلام لاحقاً، وهو النموذج الاقتصادي العبقري الذي تكرر لاحقاً مع ماكينات الحلاقة والطابعات وحبر المحابر.</li>
+            </ul>
+          </div>
+        `
+      },
+      {
+        category: "computing",
+        categoryName: "الحاسوب والذكاء الاصطناعي",
+        year: "1946 م",
+        title: "4. حاسوب ENIAC الإلكتروني العملاق وبداية عصر الحوسبة الرقمية",
+        thumb: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=1200&auto=format&fit=crop",
+        snippet: "أحدث حاسوب ENIAC ثورة تاريخية كأول حاسوب إلكتروني رقمي عملاق متعدد الأغراض قابل للبرمجة، ليفتح أبواب الثورة التكنولوجية الحديثة.",
+        images: [
+          "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=1200&auto=format&fit=crop"
+        ],
+        howItWorks: "بُني ENIAC باستخدام نحو 17,468 صماماً مفرغاً (Vacuum Tubes)، و7,200 صمام ثنائي، و1,500 مرحل (Relays)، ليغطي مساحة تفوق 160 متراً مربعاً ويقارب وزنه 30 طناً. لم يكن يعتمد على لغات البرمجة الحديثة، بل كانت البرمجة تتم يدوياً وبشكل ميكانيكي عبر إعادة توصيل آلاف الأسلاك (Patch Cables) وتبديل مفاتيح التحكم على لوحات ضخمة لتوجيه البيانات وإجراء العمليات الحسابية بسرعة بلغت 5,000 عملية جمع في الثانية الواحدة.",
+        details: "تم تطوير المشروع سراً خلال الحرب العالمية الثانية لصالح الجيش الأمريكي بواسطة المهندسين جون موشلي (John Mauchly) وجون بريسبر إيكرت (J. Presper Eckert) في جامعة بنسلفانيا، وكان الهدف الأساسي منه حساب جداول إطلاق المدفعية ومسارات المقذوفات الباليستية بدقة وسرعة هائلتين. ورغم استهلاكه الضخم للطاقة (حوالي 150 كيلوواط)، أثبت ENIAC بقطع الدليل أن الحواسيب الإلكترونية قادرة على التفوق بمراحل مذهلة على أجهزة الحساب الميكانيكية التقليدية.",
+        eniacExtra: `
+          <div style="margin-top: 15px;">
+            <h4 style="color: var(--primary-neon); margin-bottom: 12px; font-size: 1.15rem;">👩‍💻 رائدات البرمجة الأوائل والإرث الهندسي لـ ENIAC:</h4>
+            <ul style="list-style-type: none; padding-right: 10px; line-height: 1.9; color: #e2e8f0;">
+              <li style="margin-bottom: 8px;">🔹 <strong>نساء ENIAC البرمجيات:</strong> لم يقتصر الإنجاز على الهاردوير العظيم، فقد تم اختيار ست نساء عبقريات (وهن: كاي مكلولتي، بيتي جين جينينغز، بيتي سنايدر، مارلين ويسكوف، فرانسيس بيلاس، وروث ليبي) ليصبحن أول مبرمجات في التاريخ، حيث قمن بتصميم وتخطيط خوارزميات وبرامج الحاسوب هندسياً ورياضياً دون وجود أي أدلة إرشادية أو لغات برمجة سابقة.</li>
+              <li style="margin-bottom: 8px;">🔹 <strong>القفزة الزمنية الكبرى:</strong> ما كان يستغرق شهوراً طويلة من العمل المضني من فرق الحساب البشري باستخدام الآلات اليدوية، كان ENIAC ينجزه في غضون ثوانٍ معدودة، مما أعاد تشكيل الحسابات العلمية والعسكرية.</li>
+              <li style="margin-bottom: 8px;">🔹 <strong>بنية البرنامج المخزن:</strong> أدى التعقيد الشديد في إعادة توصيل الأسلاك لبرمجة ENIAC إلى إلهام العلماء لتطوير مفهوم 'البرنامج المخزن في الذاكرة' (Stored-Program Computer) بالتعاون مع العالم جون فون نيومان، وهو التصميم الهندسي الذي تبنى عليه جميع الحواسيب والهواتف الذكية حتى يومنا هذا.</li>
+            </ul>
+          </div>
+        `
+      },
+      {
+        category: "computing",
+        categoryName: "الحاسوب والذكاء الاصطناعي",
+        year: "1981 م",
+        title: "5. حاسوب IBM PC (موديل 5150) وثورة المعمارية المفتوحة",
+        thumb: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1200&auto=format&fit=crop",
+        snippet: "أحدث إطلاق حاسوب IBM الشخصي عام 1981 ثورة صناعية هائلة بفضل استراتيجيته المعمارية المفتوحة واعتماده كمعيار قياسي عالمي.",
+        images: [
+          "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1200&auto=format&fit=crop"
+        ],
+        howItWorks: "اعتمد الحاسوب على معالج إنتل (Intel 8088) بسرعة 4.77 ميجاهرتز، وذاكرة وصول عشوائي (RAM) أساسية بحجم 16 كيلوبايت (قابل للتوسعة)، ونظام التشغيل MS-DOS الذي طورته شركة ناشئة حينها تُدعى 'مايكروسوفت'. استخدم الجهاز فتحات توسعة قياسية (Expansion Slots) ومكونات مادية تُشترى من مصنعين خارجيين بدلاً من تصنيع كل جزء داخلياً.",
+        details: "في 12 أغسطس 1981، كشفت شركة آي بي إم (IBM) العريقة عن حاسوبها الشخصي (IBM PC Model 5150). وعلى غير العادة، اتخذت الشركة قراراً استراتيجياً عبقرياً عُرف بـ 'المعمارية المفتوحة' (Open Architecture)، حيث اعتمدت على قطع جاهزة من شركات أخرى (مثل معالجات إنتل ونظام تشغيل مايكروسوفت). هذا القرار سمح للشركات الأخرى بإنتاج أجهزة متوافقة (IBM Clones)، مما أدى إلى انتشار هائل للحواسيب الشخصية وانخفاض أسعارها لتصبح في متناول المكاتب والمنازل.",
+        ibmpcExtra: `
+          <div style="margin-top: 15px;">
+            <h4 style="color: var(--primary-neon); margin-bottom: 12px; font-size: 1.15rem;">🏢 الأثر الصناعي والاقتصادي لـ IBM PC:</h4>
+            <ul style="list-style-type: none; padding-right: 10px; line-height: 1.9; color: #e2e8f0;">
+              <li style="margin-bottom: 8px;">🔹 <strong>إرساء المعيار القياسي (Industry Standard):</strong> وضع IBM PC القاعدة الهندسية التي بنيت عليها معظم الحواسيب الشخصية لعقود لاحقة، محولاً الحاسوب من أداة مخصصة للمختبرات إلى جهاز مكتبي استهلاكي أساسي.</li>
+              <li style="margin-bottom: 8px;">🔹 <strong>ولادة عملاق التكنولوجيا (Microsoft & Intel):</strong> كان هذا المشروع هو حجر الأساس الذي انطلقت منه شركتا مايكروسوفت وإنتل للسيطرة على سوق التقنية العالمي عبر تحالفهما التاريخي (Wintel).</li>
+              <li style="margin-bottom: 8px;">🔹 <strong>ثورة البرمجيات المكتبية:</strong> فتح انتشار الحاسوب الشخصي الباب واسعاً لظهور برمجيات الجداول الإلكترونية الشهيرة (مثل Lotus 1-2-3) وبرمجيات معالجة النصوص، مما غيّر كلياً طريقة إدارة الأعمال والشركات.</li>
+            </ul>
+          </div>
+        `
+      },
+      {
+        category: "telecom",
+        categoryName: "الاتصالات والإنترنت",
+        year: "1876 م",
+        title: "6. الهاتف – ألكسندر غراهام بيل وصراع براءة الاختراع التاريخي",
+        thumb: "https://images.unsplash.com/photo-1520923642038-b4259acecbd7?q=80&w=1200&auto=format&fit=crop",
+        snippet: "أحدث اختراع الهاتف ثورة كبرى في التواصل الإنساني بإلغاء الحواجز المكانية، عابراً بالصوت البشري عبر الأسلاك لأول مرة في التاريخ.",
+        images: [
+          "https://images.unsplash.com/photo-1520923642038-b4259acecbd7?q=80&w=1200&auto=format&fit=crop"
+        ],
+        howItWorks: "يعتمد الهاتف التقليدي على محول كهرومغناطيسي يتألف من غشاء رقيق متصل بملف سلكي يتحرك داخل مجال مغناطيسي. عندما يتحدث الشخص، تهتز موجات الصوت وترتطم بالغشاء، مما يؤدي إلى تغيير التيار الكهربائي المار عبر الأسلاك (تيار متقطع أو متغير). وعند الطرف الآخر، يعكس جهاز الاستقبال العملية؛ حيث تتسبب التغيرات الكهربائية في تحريك غشاء مماثل ليهتز في الهواء وينتج عنه الصوت الأصلي تماماً.",
+        details: "في 10 مارس 1876، نجح المخترع الاسكتلندي الأصل ألكسندر غراهام بيل في إجراء أول مكالمة هاتفية ناجحة في التاريخ مع مساعده توماس واتسون، ناطقاً بعبارته الشهيرة: «السيد واتسون، تعال إلى هنا، أريدك» (Mr. Watson, come here, I want to see you). واجه الاختراع معركة قانونية شرسة وطويلة تُعد الأشهر في تاريخ براءات الاختراع، حيث وصل غراي (Elisha Gray) إلى مكتب البراءات في نفس يوم تقديم بيل تقريباً، لكن بيل حصل على البراءة رقم 174,465 التي غيرت وجه العالم الأبدي.",
+        phoneExtra: `
+          <div style="margin-top: 15px;">
+            <h4 style="color: var(--primary-neon); margin-bottom: 12px; font-size: 1.15rem;">📡 الأثر الحضاري والتطور التاريخي لشبكات الاتصال:</h4>
+            <ul style="list-style-type: none; padding-right: 10px; line-height: 1.9; color: #e2e8f0;">
+              <li style="margin-bottom: 8px;">🔹 <strong>إلغاء المسافات والزمن:</strong> نقل التواصل البشري من الرسائل الورقية البريدية التي كانت تستغرق الأسابيع والأشهر إلى تواصل فوري ولحظي، مما أحدث طفرة غير مسبوقة في إدارة الأعمال، والسياسة، والعلاقات الإنسانية.</li>
+              <li style="margin-bottom: 8px;">🔹 <strong>عصر المقاسم والتبديل اليدوي:</strong> تطلب تشغيل الهواتف في بداياتها وجود موظفين في مقاسم مركزية (Switchboards) يقومون يدوياً بتوصيل الأسلاك بين المتصل والمستقبل، قبل أن تتطور لاحقاً إلى المقاسم الآلية والرقمية.</li>
+              <li style="margin-bottom: 8px;">🔹 <strong>التحول إلى الشبكات الخلوية والألياف الضوئية:</strong> مهد اختراع بيل الطريق لظهور شبكات الهواتف المحمولة والاتصالات عبر الأقمار الصناعية وشبكات الألياف الضوئية فائقة السرعة التي تربط العالم بأسره اليوم.</li>
+            </ul>
+          </div>
+        `
+      },
+      {
+        category: "telecom",
+        categoryName: "الاتصالات والإنترنت",
+        year: "1989–1991 م",
+        title: "7. الشبكة العنكبوتية العالمية (WWW) – تيم بيرنرز لي وولادة الويب في CERN",
+        thumb: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200&auto=format&fit=crop",
+        snippet: "ابتكر العالم البريطاني تيم بيرنرز-لي الشبكة العنكبوتية العالمية في مختبر سيرن (CERN)، محولاً الإنترنت إلى فضاء رقمي تفاعلي يربط البشرية بالمعلومات.",
+        images: [
+          "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200&auto=format&fit=crop"
+        ],
+        howItWorks: "تعتمد بنية الويب الأساسية على ثلاثة أركان تقنية رئيسية ابتكرها بيرنرز-لي: 1) لغة ترميز النص الفائق (HTML) لهيكلة وتنسيق المستندات، 2) بروتوكول نقل النص الفائق (HTTP) لتنظيم طلبات الاستجابة المتبادلة بين العميل (البرنامج المتصفح) والخادم (Server)، 3) محدد الموارد المعياري (URL) لتعريف وعنونة كل صفحة أو ملف بفرادة مطلقة على الشبكة. يطلب المتصفح الملف، فيقوم الخادم بمعالجة الطلب وإرسال محتوى HTML ليتم عرضه وتفسيره بصرياً للمستخدم.",
+        details: "في عام 1989، وبينما كان يعمل كباحث في المنظمة الأوروبية للأبحاث النووية (CERN)، اقترح تيم بيرنرز-لي نظام إدارة معلومات يعتمد على الروابط التشعبية (Hypertext) لحل مشكلة ضياع وتبادل الأبحاث المعقدة بين آلاف العلماء المتفرمين حول العالم. وفي عام 1991، أطلق أول خادم ويب ومتصفح للعامة. ولعل القرار الأجمل والأكثر تأثيراً في تاريخ البشرية اتخذته إدارة CERN عام 1993 بإعلان أن تقنية الويب مجانية بالكامل ومتاحة للجميع دون أي حقوق ملكية أو رسوم مالية، وهو القرار الجريء الذي أشعل فتيل ثورة الإنترنت التجارية والعالمية.",
+        wwwExtra: `
+          <div style="margin-top: 15px;">
+            <h4 style="color: var(--primary-neon); margin-bottom: 12px; font-size: 1.15rem;">🌐 ركائز ثورة الويب ومراحل تطورها:</h4>
+            <ul style="list-style-type: none; padding-right: 10px; line-height: 1.9; color: #e2e8f0;">
+              <li style="margin-bottom: 8px;">🔹 <strong>إهداء التكنولوجيا للبشرية:</strong> رفض بيرنرز-لي تماماً تسجيل برائة اختراع تجارية أو السعي لجني ثروة طائلة من اختراعه، مفضلاً جعله ملكية عامة مجانية ومفتوحة لخدمة تقدم الإنسانية جمعاء.</li>
+              <li style="margin-bottom: 8px;">🔹 <strong>الفرق بين الإنترنت والويب:</strong> غالباً ما يتم الخلط بين المفهومين؛ فالإنترنت هو البنية التحتية الفيزيائية والمادية للشبكات (الكابلات، الأجهزة، والموجهات)، بينما الويب (WWW) هي الطبقة البرمجية والبروتوكولية التي تتيح تصفح وعرض المحتوى والصفحات عبر هذه البنية.</li>
+              <li style="margin-bottom: 8px;">🔹 <strong>مراحل تطور الأجيال (Web 1.0 إلى Web 3.0):</strong> تطورت الويب من صفحات ثابتة للقراءة فقط (Web 1.0)، مروراً بالويب التفاعلي والشبكات الاجتماعية ومشاركة المحتوى المنشأ من المستخدمين (Web 2.0)، وصولاً إلى عصر البيانات المترابطة والذكاء الاصطناعي (Web 3.0).</li>
+            </ul>
+          </div>
+        `
+      },
+      {
+        category: "battery",
+        categoryName: "البطاريات وتخزين الطاقة",
+        year: "1800 م – المستقبل",
+        title: "8. رحلة تطور البطاريات الكهربائية – من عمود فولتا إلى ثورة الليثيوم والحالة الصلبة",
+        thumb: "https://images.unsplash.com/photo-1619641782821-75178523538b?q=80&w=1200&auto=format&fit=crop",
+        snippet: "من عمود أليساندرو فولتا البدائي إلى بطاريات الليثيوم-أيون المتطورة وبطاريات الحالة الصلبة المستقبلية لتخزين الطاقة بكفاءة عالية.",
+        images: [
+          "https://images.unsplash.com/photo-1619641782821-75178523538b?q=80&w=1200&auto=format&fit=crop",
+          "https://images.unsplash.com/photo-1558441719-634bbe61b5cd?q=80&w=1200&auto=format&fit=crop"
+        ],
+        howItWorks: "تعتمد البطارية الكهربائية على خلايا كهروكيميائية تتكون أساساً من قطبين: الأنود (القطب السالب) والكاثود (القطب الموجب)، يفصل بينهما محلول أو مادة إلكتروليتية. أثناء تفريغ الشحنة، تحدث تفاعلات أكسدة واختزال تحرر الإلكترونات لتسري عبر الدائرة الخارجية لتوليد التيار الكهربائي، بينما تنتقل الأيونات داخلياً عبر الإلكتروليت للحفاظ على التوازن الكهربائي. وعند إعادة الشحنة، تنعكس هذه العملية لتخزين الطاقة مجدداً.",
+        details: "بدأت قصة تخزين الكهرباء رسمياً عام 1800 عندما نجح العالم الفيزيائي الإيطالي أليساندرو فولتا في ابتكار أول خلية كهروكيميائية منتجة للتيار عُرفت بـ 'عمود فولتا' (Voltaic Pile)، والتي تكوّنت من أقراص متناوبة من النحاس والزنك مفصولة بقطع قماش مبللة بالماء المالح، مما كسر الاعتقاد السائد بأن الكهرباء تولد حصراً من الكائنات الحية. تلت ذلك محطات كبرى؛ أبرزها ابتكار بطارية الرصاص الحمضية قابلة لإعادة الشحن عام 1859، وصولاً إلى الثورة التكنولوجية الكبرى في تسعينيات القرن الماضي مع إطلاق بطاريات الليثيوم-أيون التي غيرت وجه العالم الذكي والمحمول.",
+        batteryExtra: `
+          <div style="margin-top: 15px;">
+            <h4 style="color: var(--primary-neon); margin-bottom: 12px; font-size: 1.15rem;">🔋 محطات وتحولات جوهرية في تقنيات تخزين الطاقة:</h4>
+            <ul style="list-style-type: none; padding-right: 10px; line-height: 1.9; color: #e2e8f0;">
+              <li style="margin-bottom: 8px;">🔹 <strong>عمود فولتا (1800):</strong> حجر الأساس لعلم الكهرباء الحركية، ومنه اشتق اسم وحدة القياس الكهربائية 'الفولت' تكريماً لجهود مخترعه.</li>
+              <li style="margin-bottom: 8px;">🔹 <strong>ثورة الليثيوم-أيون (1991):</strong> أدت إلى تصغير حجم البطاريات وزيادة كثافتها وطاقتها بشكل مذهل بفضل خفة وزن عنصر الليثيوم، مما أتاح ظهور الهواتف الذكية، والأجهزة القابلة للارتداء، وغزو السيارات الكهربائية للأسواق العالمية، ونال مخترعوها جائزة نوبل.</li>
+              <li style="margin-bottom: 8px;">🔹 <strong>مستقبل بطاريات الحالة الصلبة (Solid-State):</strong> التقنية الواعدة القادمة التي تستبدل الإلكتروليت السائل بمادة صلبة، مما يضاعف الكثافة التخزينية، ويزيل مخاطر الاشتعال كلياً، ويمنح السيارات الكهربائية مدى سير أطول وشحناً فائق السرعة.</li>
+            </ul>
+          </div>
+        `
+      },
+      {
+        category: "battery",
+        categoryName: "البطاريات وتخزين الطاقة",
+        year: "1859 م – المستقبل",
+        title: "9. بطاريات المركبات الكهربائية وأنظمة إدارة الطاقة الذكية (BMS)",
+        thumb: "https://images.unsplash.com/photo-1593941707882-a5bba14938c7?q=80&w=1200&auto=format&fit=crop",
+        snippet: "تطور حزم الليثيوم العملاقة وأنظمة الإدارة الذكية (BMS) التي أحدثت ثورة في صناعة السيارات الكهربائية وتقود مستقبل النقل المستدام.",
+        images: [
+          "https://images.unsplash.com/photo-1593941707882-a5bba14938c7?q=80&w=1200&auto=format&fit=crop"
+        ],
+        howItWorks: "تتألف بطاريات السيارات الكهربائية الحديثة من حزم عملاقة تضم آلاف خلايا الليثيوم-أيون الصغيرة المرتبة في وحدات متكاملة. يعمل نظام إدارة البطارية الذكي (BMS - Battery Management System) كعقل إلكتروني فائق الدقة؛ حيث يراقب باستمرار الفولتية لكل خلية على حدة، ودرجات الحرارة، وحالة الشحن (SoC)، ومعدلات التفريغ والشحن السريع. يقوم النظام أيضاً بتنظيم عمليات الفرامل التجديدية (Regenerative Braking) لاستعادة الطاقة الحركية وإعادتها لتخزينها في البطارية أثناء التباطؤ.",
+        details: "بدأت القصة الفعلية لتخزين طاقة المركبات عام 1859 عندما ابتكر الفرنسي غاستون بلانتي (Gaston Planté) أول بطارية رصاص-حمضية قابلة لإعادة الشحن، والتي شاع استخدامها في أوائل القرن العشرين لتشغيل السيارات الكهربائية الأولى قبل أن يهيمن الوقود الأحفوري مؤقتاً. ومع التحديات البيئية وارتفاع كفاءة الكيمياء الحديثة، عادت السيارات الكهربائية للسيادة بفضل بطاريات الليثيوم التي تمنح السيارات مدى سير طويل، وكثافة طاقة مذهلة، وقدرة على التسارع الفوري، مع استمرار الأبحاث المتقدمة لتطوير الشحن الخارق وبطاريات الحالة الصلبة.",
+        evBatteryExtra: `
+          <div style="margin-top: 15px;">
+            <h4 style="color: var(--primary-neon); margin-bottom: 12px; font-size: 1.15rem;">🚗 الأبعاد الهندسية والبيئية لثورة بطاريات السيارات:</h4>
+            <ul style="list-style-type: none; padding-right: 10px; line-height: 1.9; color: #e2e8f0;">
+              <li style="margin-bottom: 8px;">🔹 <strong>الأمان والتحكم الحراري:</strong> يُعد نظام (BMS) ركيزة أمان قصوى لمنع حدوث ما يُعرف بـ 'الهروب الحراري' (Thermal Runaway)، حيث يقوم بقطع التيار أو تبريد الخلايا فوراً عند استشعار أي ارتفاع غير طبيعي في الحرارة.</li>
+              <li style="margin-bottom: 8px;">🔹 <strong>الثورة البيئية والنقل المستدام:</strong> تمثل بطاريات المركبات الكهربائية الحل الأبرز لخفض الانبعاثات الكربونية العالمية، وتحويل قطاع النقل والمواصلات نحو اعتماد كامل على مصادر الطاقة المتجددة (الشمسية والرياح).</li>
+              <li style="margin-bottom: 8px;">🔹 <strong>تحديات المستقبل وإعادة التدوير:</strong> يشهد القطاع استثمارات ضخمة لتطوير تقنيات إعادة تدوير بطاريات الليثيوم بكفاءة عالية لاستعادة المعادن النادرة (كالنيكل والكوبالت والليثيوم)، لضمان استدامة هذه الصناعة مستقبلاً.</li>
+            </ul>
+          </div>
+        `
+      },
+      {
+        category: "generator",
+        categoryName: "المولدات والكهرباء",
+        year: "1831 م",
+        title: "10. المولد الكهربائي – مايكل فاراداي واكتشاف الحث الكهرومغناطيسي",
+        thumb: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?q=80&w=1200&auto=format&fit=crop",
+        snippet: "اكتشف مايكل فاراداي ظاهرة الحث الكهرومغناطيسي عام 1831، مبتكراً أول نموذج يحول الطاقة الحركية إلى طاقة كهربائية ومؤسساً لعصر الطاقة الحديثة.",
+        images: [
+          "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?q=80&w=1200&auto=format&fit=crop",
+          "https://images.unsplash.com/photo-1509391366360-2e959784a276?q=80&w=1200&auto=format&fit=crop"
+        ],
+        howItWorks: "يعتمد عمل المولد الكهربائي على مبدأ الحث الكهرومغناطيسي (Faraday's Law of Induction). عندما يتحرك موصل أو ملف سلكي داخل مجال مغناطيسي، أو عندما يتغير التدفق المغناطيسي عبر الملف مع مرور الوقت، تتولد قوة دفع كهربائية مستحثة (EMF) تؤدي إلى تدفق الإلكترونات وتوليد تيار كهربائي. في المولدات الصناعية الحديثة، يقوم مصدر حركي (مثل التوربينات المائية، البخارية، أو رياح) بتدوير الدوار (Rotor) بسرعة داخل الجزء الثابت (Stator) لإنتاج الكهرباء بكميات ضخمة.",
+        details: "في عام 1831، حقق الفيزيائي والكيميائي البريطاني العصامي مايكل فاراداي إنجازاً تاريخياً عظيماً باكتشاف ظاهرة الحث الكهرومغناطيسي. قام فاراداي بلف سلك معزول حول حلقة حديدية وتحريك مغناطيس بجواره، ليلاحظ تولد تيار كهربائي لحظي في السلك. صنع فاراداي أول مولد كهربائي بدائي عُرف بـ 'قرص فاراداي' (Faraday Disk)، وهو الإنجاز الذي حوّل الكهرباء من مجرد ظاهرة ساكنة أو تجارب كيميائية مرتبطة بالبطاريات البدائية إلى قوة طاقة حركية وصناعية هائلة قادرة على إنارة المدن وتشغيل آلات المصانع.",
+        generatorExtra: `
+          <div style="margin-top: 15px;">
+            <h4 style="color: var(--primary-neon); margin-bottom: 12px; font-size: 1.15rem;">⚡ الأثر التاريخي والثورة الصناعية للمولدات الكهربائية:</h4>
+            <ul style="list-style-type: none; padding-right: 10px; line-height: 1.9; color: #e2e8f0;">
+              <li style="margin-bottom: 8px;">🔹 <strong>قانون فاراداي للحث:</strong> أصبح القانون الأساسي الذي تُبنى عليه كافة الهندسة الكهربائية والمولدات والمحولات والمركبات الكهربائية حتى يومنا هذا، حاسماً العلاقة بين التغير المغناطيسي وتوليد الجهد.</li>
+              <li style="margin-bottom: 8px;">🔹 <strong>من المختبر إلى محطات الطاقة الكبرى:</strong> تطورت أفكار فاراداي لترسم ملامح محطات توليد الطاقة العملاقة التي تعتمد على طاقة المياه، والبخار، والوقود، والرياح لتغذية الكوكب بأسره بالكهرباء المستدامة.</li>
+              <li style="margin-bottom: 8px;">🔹 <strong>عصب الحضارة الحديثة:</strong> لولا اختراع المولد الكهربائي والقدرة على نقل الكهرباء لمسافات شاسعة، لما ظهرت الحواسيب، ولا الإنترنت، ولا شبكات الإضاءة والاتصالات التي تتكئ عليها البشرية جمعاء اليوم.</li>
+            </ul>
+          </div>
+        `
+      },
+      {
+        category: "bigdata",
+        categoryName: "البيانات الضخمة و IoT",
+        year: "العصر الحديث (2010+)",
+        title: "11. البيانات الضخمة، إنترنت الأشياء (IoT) وبث التدفقات اللحظية (Apache Kafka & Spark)",
+        thumb: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=1200&auto=format&fit=crop",
+        snippet: "معالجة مليارات الأحداث والبيانات اللحظية القادمة من أجهزة الاستشعار وإنترنت الأشياء عبر أنظمة توزيع ومحركات ذاكرة حية فائقة السرعة.",
+        images: [
+          "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=1200&auto=format&fit=crop"
+        ],
+        howItWorks: "تعتمد هندسة البيانات الحديثة على تكامل منظومتين ثوريتين: 1) Apache Kafka: منصة بث تدفقات الأحداث (Event Streaming) التي تلتقط وتنقل مليارات الرسائل والبيانات لحظياً وبموثوقية فائقة بين الأنظمة الموزعة عبر نموذج النشر والاشتراك (Publish-Subscribe). 2) Apache Spark: محرك معالجة موزّع فائق السرعة يعتمد على معالجة البيانات داخل الذاكرة العشوائية (In-Memory Processing)، مما يتيح تحليل التدفقات والبيانات الضخمة وإجراء خوارزميات التعلم الآلي في أجزاء من الثانية دون الحاجة للقراءة والكتابة المتكررة على الأقراص الصلبة.",
+        details: "مع الانفجار الهائل في أعداد الأجهزة المتصلة بالإنترنت (مليارات المستشعرات، الهواتف الذكية، والمركبات المتصلة)، عجزت قواعد البيانات العلائقية التقليدية (RDBMS) عن التعامل مع تحديات البيانات الضخمة المعروفة بـ 'الخصائص الأربع' (الحجم الهائل Volume، السرعة الفائقة Velocity، التنوع الشديد Variety، والموثوقية Veracity). ظهرت هذه التقنيات المتقدمة لتشكل العصب الرئيسي للبنية التحتية الرقمية في الشركات العالمية الكبرى مثل Netflix وUber، مما أتاح تحليل سلوك المستخدمين، تشخيص أعطال المصانع ذياباً، وإدارة المدن الذكية بكفاءة مطلقة.",
+        bigdataExtra: `
+          <div style="margin-top: 15px;">
+            <h4 style="color: var(--primary-neon); margin-bottom: 12px; font-size: 1.15rem;">📊 الركائز الهندسية وعالم الأنظمة اللحظية:</h4>
+            <ul style="list-style-type: none; padding-right: 10px; line-height: 1.9; color: #e2e8f0;">
+              <li style="margin-bottom: 8px;">🔹 <strong>عمارة تعتمد على الأحداث (Event-Driven Architecture):</strong> تفصل منصة Kafka بين مصادر توليد البيانات والأنظمة المستهلكة لها، مما يضمن استقرار المنظومة بالكامل وعدم توقفها حتى لو توقف أحد الخوادم المفاجئة (Fault Tolerance).</li>
+              <li style="margin-bottom: 8px;">🔹 <strong>ثورة إنترنت الأشياء الصناعي (IIoT):</strong> تتيح هذه المنصات مراقبة الآلات والمعدات الحساسة في الوقت الفعلي والتنبؤ بالأعطال قبل وقوعها، مما يوفر مليارات الدولارات ويمنع الكوارث التشغيلية.</li>
+              <li style="margin-bottom: 8px;">🔹 <strong>التحول نحو الذكاء الاصطناعي اللحظي:</strong> يُمكّن دمج Kafka مع Spark من تغذية نماذج الذكاء الاصطناعي والتعلم العميق ببيانات حية ومحدثة ثانيةً بعد ثانية، مما يصنع فهماً استباقياً ودقيقاً للقرارات الآلية.</li>
+            </ul>
+          </div>
+        `
+      },
+      {
+        category: "computing",
+        categoryName: "الحاسوب والذكاء الاصطناعي",
+        year: "العصر الحديث والمستقبل",
+        title: "12. الذكاء الاصطناعي والنماذج اللغوية الكبرى (AI & LLMs) وعصر الثورة المعرفية",
+        thumb: "https://images.unsplash.com/photo-1677442136019-21780efad99a?q=80&w=1200&auto=format&fit=crop",
+        snippet: "طفرة تقنية هائلة تعيد صياغة القدرات الإدراكية للبشرية عبر الشبكات العصبية العميقة ونماذج المحولات (Transformers) المتقدمة.",
+        images: [
+          "https://images.unsplash.com/photo-1677442136019-21780efad99a?q=80&w=1200&auto=format&fit=crop"
+        ],
+        howItWorks: "تعتمد النماذج اللغوية الكبرى (LLMs) وذكاء العصر الحديث على هندسة 'المحولات' (Transformers) الثورية التي قُدمت عام 2017، وخصوصاً آلية الانتباه (Self-Attention Mechanism). تتدرب هذه النماذج على تليليارات الكلمات والبيانات الضخمة عبر شبكات عصبية عميقة (Deep Neural Networks) تتألف من مليارات المعاملات (Parameters). يقوم النموذج بتحليل السياق، التنبؤ بالكلمة أو الرمز التالي بدقة رياضية، وفهم المعاني الدلالية وتوليد النصوص، البرمجيات، والتحليلات المعقدة بلحظية مذهلة.",
+        details: "انطلقت جذور الذكاء الاصطناعي كفكرة نظرية في منتصف القرن العشرين مع اختبار تورين (Turing Test) ومحاولات الذكاء الرمزي (Symbolic AI)، واجهت خلالها عقوداً من الركود عُرفت بـ 'شتاء الذكاء الاصطناعي'. لكن الانفجار الهائل في القوة الحسابية لوحدات معالجة الرسومات (GPUs) وتوفر البيانات الضخمة أدى إلى نهضة التعلم العميق (Deep Learning). واليوم، تقود النماذج اللغوية الكبرى والذكاء الاصطناعي التوليدي ثورة غير مسبوقة تلامس كافة مناحي الحياة من اكتشاف الأدوية الحيوية وتطوير البرمجيات إلى الإبداع الفني والتعليم التفاعلي.",
+        aiExtra: `
+          <div style="margin-top: 15px;">
+            <h4 style="color: var(--primary-neon); margin-bottom: 12px; font-size: 1.15rem;">🤖 ركائز ومستقبل الثورة المعرفية للذكاء الاصطناعي:</h4>
+            <ul style="list-style-type: none; padding-right: 10px; line-height: 1.9; color: #e2e8f0;">
+              <li style="margin-bottom: 8px;">🔹 <strong>آلية الانتباه (Attention Mechanism):</strong> الثورة البرمجية التي جعلت النماذج قادرة على ربط الكلمات والعبارات البعيدة في النص ببعضها لفهم السياق الكامل بدلاً من القراءة الخطية البسيطة.</li>
+              <li style="margin-bottom: 8px;">🔹 <strong>التعلم التعزيزي من التغذية البشرية (RLHF):</strong> تقنية متقدمة تُستخدم لمواءمة مخرجات النماذج مع القيم والأخلاقيات البشرية، وضمان تقديم إجابات آمنة، دقيقة، ومفيدة.</li>
+              <li style="margin-bottom: 8px;">🔹 <strong>الآفاق المستقبلية والعملاقة:</strong> يتجه العالم نحو تطوير أنظمة قادرة على الاستدلال المتقدم، والاندماج مع الحوسبة الكمومية، لفتح آفاق غير مسبوقة في حل أعقد أسرار الكون وعلاج الأمراض المستعصية.</li>
+            </ul>
+          </div>
+        `
+      }
+    ];
+
+    let currentCategory = 'all';
+    let searchQuery = '';
+
+    function renderEras(data) {
+      const grid = document.getElementById('timelineGrid');
+      const countEl = document.getElementById('resultsCount');
+      
+      if (data.length === 0) {
+        grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 50px; color: var(--text-muted); font-size: 1.2rem;">لم يتم العثور على نتائج تطابق بحثك.</div>';
+        countEl.textContent = '0 نتيجة';
+        return;
+      }
+
+      countEl.textContent = `تم العثور على ${data.length} اختراع وتقنية`;
+
+      grid.innerHTML = data.map((item) => {
+        const originalIndex = erasData.indexOf(item);
+        return `
+          <div class="era-card">
+            <img src="${item.thumb || fallbackImage}" alt="${item.title}" class="era-img" loading="lazy" onerror="this.src='${fallbackImage}'">
+            <div class="era-body">
+              <div>
+                <div class="era-badge-group">
+                  <span class="era-year">${item.year}</span>
+                  <span class="era-cat-tag">${item.categoryName}</span>
+                </div>
+                <h3 class="era-title">${item.title}</h3>
+                <p class="era-snippet">${item.snippet}</p>
+              </div>
+              <button class="open-btn" onclick="openModal(${originalIndex})">استكشف التفاصيل والتقنية ➔</button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function filterData(category, btn) {
+      currentCategory = category;
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      if(btn) btn.classList.add('active');
+      applyFilters();
+    }
+
+    function handleSearch() {
+      searchQuery = document.getElementById('searchInput').value.trim().toLowerCase();
+      applyFilters();
+    }
+
+    function applyFilters() {
+      let filtered = erasData.filter(item => {
+        const matchesCat = (currentCategory === 'all' || item.category === currentCategory);
+        const matchesSearch = searchQuery === '' || 
+          item.title.toLowerCase().includes(searchQuery) ||
+          item.snippet.toLowerCase().includes(searchQuery) ||
+          item.details.toLowerCase().includes(searchQuery) ||
+          item.year.toLowerCase().includes(searchQuery) ||
+          item.categoryName.toLowerCase().includes(searchQuery);
+        return matchesCat && matchesSearch;
+      });
+      renderEras(filtered);
+    }
+
+    function openModal(index) {
+      const item = erasData[index];
+      const modal = document.getElementById('modalOverlay');
+      const body = document.getElementById('modalBody');
+
+      let extraContent = '';
+
+      if (item.category === 'bigdata') {
+        extraContent = `
+          <div class="bigdata-highlight">
+            <h4>🚀 ركائز العصر الحديث للبيانات وإنترنت الأشياء (IoT)</h4>
+            <p>مع تزايد عدد الأجهزة المتصلة بالإنترنت (مليارات المستشعرات والكاميرات والهواتف والسيارات)، يتم توليد كميات هائلة من البيانات ثانيةً بعد ثانية. تتطلب هذه البيانات معالجة فورية وتخزيناً موزّعاً لا تستطيع قواعد البيانات التقليدية التعامل معه.</p>
+          </div>
+
+          <div class="data-flow">
+            <div class="flow-step">1. المصادر (IoT / أجهزة)</div>
+            <div class="flow-step">2. التدفق (Apache Kafka)</div>
+            <div class="flow-step">3. المعالجة (Apache Spark)</div>
+            <div class="flow-step">4. التحليل والذكاء الاصطناعي</div>
+          </div>
+
+          <div class="v-grid">
+            <div class="v-card">
+              <h4>⚡ Apache Kafka</h4>
+              <p>منصة بث تدفقات البيانات (Event Streaming) لنقل ملايين الأحداث بين الأنظمة بلحظية تامة ودون تأخير.</p>
+            </div>
+            <div class="v-card">
+              <h4>🔥 Apache Spark</h4>
+              <p>محرك معالجة موزّع فائق السرعة لتحليل البيانات الضخمة في الذاكرة العشوائية وإجراء عمليات التعلم الآلي.</p>
+            </div>
+            <div class="v-card">
+              <h4>🌐 إنترنت الأشياء (IoT)</h4>
+              <p>ربط الأجهزة المادية ببعضها عبر الإنترنت لجمع البيانات وإرسالها وتحليلها واتخاذ قرارات تلقائية.</p>
+            </div>
+          </div>
+        `;
+      }
+
+      body.innerHTML = `
+        <button class="close-btn" onclick="closeModal()">إغلاق ✕</button>
+        <span class="era-year" style="display:inline-block; margin-bottom:15px;">${item.year}</span>
+        <h2 class="modal-title">${item.title}</h2>
+        <p class="modal-intro">${item.snippet}</p>
+
+        <div class="modal-img-grid">
+          ${item.images.map(img => `<img src="${img}" alt="${item.title}" class="modal-img" onerror="this.src='${fallbackImage}'">`).join('')}
+        </div>
+
+        <div class="modal-section">
+          <h3>كيف تعمل هذه التقنية؟</h3>
+          <p>${item.howItWorks}</p>
+        </div>
+
+        <div class="modal-section">
+          <h3>التاريخ والأهمية العالمية</h3>
+          <p>${item.details}</p>
+        </div>
+
+        ${item.cameraTypes ? `
+          <div class="modal-section">
+            <h3>تطور أنواع الكاميرات عبر التاريخ</h3>
+            ${item.cameraTypes}
+          </div>
+        ` : ''}
+
+        ${item.niepceExtra ? `
+          <div class="modal-section">
+            <h3>محطات وتفاصيل إضافية عن الاختراع</h3>
+            ${item.niepceExtra}
+          </div>
+        ` : ''}
+
+        ${item.kodakExtra ? `
+          <div class="modal-section">
+            <h3>أبعاد الثورة الرقمية والتجارية لكوداك</h3>
+            ${item.kodakExtra}
+          </div>
+        ` : ''}
+
+        ${item.eniacExtra ? `
+          <div class="modal-section">
+            <h3>رائدات البرمجة والأثر التاريخي لـ ENIAC</h3>
+            ${item.eniacExtra}
+          </div>
+        ` : ''}
+
+        ${item.ibmpcExtra ? `
+          <div class="modal-section">
+            <h3>الأثر الصناعي والاقتصادي لـ IBM PC</h3>
+            ${item.ibmpcExtra}
+          </div>
+        ` : ''}
+
+        ${item.phoneExtra ? `
+          <div class="modal-section">
+            <h3>الأثر الحضاري وتطور شبكات الاتصال</h3>
+            ${item.phoneExtra}
+          </div>
+        ` : ''}
+
+        ${item.wwwExtra ? `
+          <div class="modal-section">
+            <h3>ركائز وتطور الثورة الرقمية للويب</h3>
+            ${item.wwwExtra}
+          </div>
+        ` : ''}
+
+        ${item.batteryExtra ? `
+          <div class="modal-section">
+            <h3>محطات وتحولات تخزين الطاقة</h3>
+            ${item.batteryExtra}
+          </div>
+        ` : ''}
+
+        ${item.evBatteryExtra ? `
+          <div class="modal-section">
+            <h3>الأبعاد الهندسية والبيئية لبطاريات المركبات</h3>
+            ${item.evBatteryExtra}
+          </div>
+        ` : ''}
+
+        ${item.generatorExtra ? `
+          <div class="modal-section">
+            <h3>الأثر التاريخي وثورة المولدات الكهربائية</h3>
+            ${item.generatorExtra}
+          </div>
+        ` : ''}
+
+        ${item.bigdataExtra ? `
+          <div class="modal-section">
+            <h3>الركائز الهندسية وعالم الأنظمة اللحظية</h3>
+            ${item.bigdataExtra}
+          </div>
+        ` : ''}
+
+        ${item.aiExtra ? `
+          <div class="modal-section">
+            <h3>ركائز ومستقبل الثورة المعرفية للذكاء الاصطناعي</h3>
+            ${item.aiExtra}
+          </div>
+        ` : ''}
+
+        ${extraContent}
+      `;
+
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      document.getElementById('modalOverlay').classList.remove('active');
+      document.body.style.overflow = 'auto';
+    }
+
+    window.onclick = function(event) {
+      const modal = document.getElementById('modalOverlay');
+      if (event.target === modal) {
+        closeModal();
+      }
+    }
+
+    // التشغيل الأولي
+    renderEras(erasData);
+  </script>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>جميع الحقوق محفوظة © 2026 <strong>Era Shift</strong> — موسوعة تاريخ وتطور الابتكارات العالمية.</p>
+  </footer>
+
+</body>
+</html>
